@@ -60,6 +60,8 @@
     <Compile Include="Actions\PostApiKey.cs" />
     <Compile Include="Actions\PostBot.cs" />
     <Compile Include="Actions\PostGroup.cs" />
+    <Compile Include="Actions\PostSymbolLang.cs" />
+    <Compile Include="Actions\PostSymbolType.cs" />
     <Compile Include="PropertyMap.cs">
       <SubType>UserControl</SubType>
     </Compile>

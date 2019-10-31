@@ -25,7 +25,9 @@ namespace WinClient.Forms
             new ListSymbolTypes(),
             new PostApiKey(),
             new PostGroup(),
-            new PostBot()
+            new PostBot(),
+            new PostSymbolLang(),
+            new PostSymbolType()
         };
         private IAction _current;
 
@@ -91,6 +93,7 @@ namespace WinClient.Forms
                 _current.ProcessOutput(c, res, _netManager);
             }
             _current = null;
+            InputRun.Visible = false;
         }
 
         private void ActionList_Click(object sender, EventArgs e)
@@ -121,7 +124,6 @@ namespace WinClient.Forms
         {
             LoadIndicator.Visible = true;
             RunRequest(_current, IOPanel.Controls[0]);
-            InputRun.Visible = false;
             LoadIndicator.Visible = false;
         }
     }
