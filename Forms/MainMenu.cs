@@ -22,7 +22,10 @@ namespace WinClient.Forms
             new ListApiKeys(),
             new ListBots(),
             new ListSymbolLangs(),
-            new ListSymbolTypes()
+            new ListSymbolTypes(),
+            new PostApiKey(),
+            new PostGroup(),
+            new PostBot()
         };
         private IAction _current;
 
