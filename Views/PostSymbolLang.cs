@@ -6,22 +6,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class GroupCreate
+    class LangCreate
     {
         [Required]
         public string Name { get; set; }
         [Required]
-        public string[] Permissions { get; set; }
+        public string DisplayName { get; set; }
     }
 
-    class PostGroup : IAction
+    class PostSymbolLang// : IAction
     {
         public string Method => "POST";
 
-        public string DisplayName => "Create Group";
+        public string DisplayName => "Create Symbol Lang";
 
         public bool NeedAuth => true;
 
@@ -29,7 +30,7 @@ namespace WinClient.Actions
         {
             var p = new PropertyMap();
 
-            p.SetPropertyObject(new GroupCreate());
+            p.SetPropertyObject(new LangCreate());
             return (p);
         }
 
@@ -40,17 +41,17 @@ namespace WinClient.Actions
 
         public JObject GetInput(Control ctrl)
         {
-            var mdl = ((PropertyMap)ctrl).GetPropertyObject<GroupCreate>();
+            var mdl = ((PropertyMap)ctrl).GetPropertyObject<LangCreate>();
             return (JObject.FromObject(new
             {
                 name = mdl.Name,
-                permissions = mdl.Permissions
+                displayName = mdl.DisplayName
             }));
         }
 
         public string GetURL(Control ctrl)
         {
-            return ("admin/group");
+            return ("symbol/lang");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)

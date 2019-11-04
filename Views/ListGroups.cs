@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class ListApiKeys : IAction
+    class ListGroups// : IAction
     {
         public string Method => "GET";
 
-        public string DisplayName => "List Api Keys";
+        public string DisplayName => "List Groups";
 
         public bool NeedAuth => true;
 
@@ -33,7 +34,7 @@ namespace WinClient.Actions
 
         public string GetURL(Control ctrl)
         {
-            return ("admin/apikey");
+            return ("admin/group");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)

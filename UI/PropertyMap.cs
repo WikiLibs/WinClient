@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WinClient.Actions
+namespace WinClient.UI
 {
     public partial class PropertyMap : UserControl
     {

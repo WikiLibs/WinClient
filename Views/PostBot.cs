@@ -6,22 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class TypeCreate
+    class BotCreate
     {
         [Required]
         public string Name { get; set; }
         [Required]
-        public string DisplayName { get; set; }
+        public string Email { get; set; }
+        public bool? Private { get; set; }
+        public string ProfileMsg { get; set; }
+        [Required]
+        public string Pseudo { get; set; }
     }
 
-    class PostSymbolType : IAction
+    class PostBot// : IAction
     {
         public string Method => "POST";
 
-        public string DisplayName => "Create Symbol Type";
+        public string DisplayName => "Create Bot";
 
         public bool NeedAuth => true;
 
@@ -29,7 +34,7 @@ namespace WinClient.Actions
         {
             var p = new PropertyMap();
 
-            p.SetPropertyObject(new TypeCreate());
+            p.SetPropertyObject(new BotCreate());
             return (p);
         }
 
@@ -40,17 +45,20 @@ namespace WinClient.Actions
 
         public JObject GetInput(Control ctrl)
         {
-            var mdl = ((PropertyMap)ctrl).GetPropertyObject<TypeCreate>();
+            var mdl = ((PropertyMap)ctrl).GetPropertyObject<BotCreate>();
             return (JObject.FromObject(new
             {
                 name = mdl.Name,
-                displayName = mdl.DisplayName
+                email = mdl.Email,
+                @private = mdl.Private,
+                profileMsl = mdl.ProfileMsg,
+                pseudo = mdl.Pseudo
             }));
         }
 
         public string GetURL(Control ctrl)
         {
-            return ("symbol/type");
+            return ("bot");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)

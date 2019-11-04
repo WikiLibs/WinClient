@@ -6,22 +6,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class LangCreate
+    class ApiKeyCreate
     {
         [Required]
-        public string Name { get; set; }
+        public string Description { get; set; }
         [Required]
-        public string DisplayName { get; set; }
+        public int Flags { get; set; }
+        [Required]
+        public int UseNum { get; set; }
+        [Required]
+        public DateTime ExpirationDate { get; set; }
     }
 
-    class PostSymbolLang : IAction
+    class PostApiKey// : IAction
     {
         public string Method => "POST";
 
-        public string DisplayName => "Create Symbol Lang";
+        public string DisplayName => "Create ApiKey";
 
         public bool NeedAuth => true;
 
@@ -29,7 +34,7 @@ namespace WinClient.Actions
         {
             var p = new PropertyMap();
 
-            p.SetPropertyObject(new LangCreate());
+            p.SetPropertyObject(new ApiKeyCreate());
             return (p);
         }
 
@@ -40,17 +45,19 @@ namespace WinClient.Actions
 
         public JObject GetInput(Control ctrl)
         {
-            var mdl = ((PropertyMap)ctrl).GetPropertyObject<LangCreate>();
+            var mdl = ((PropertyMap)ctrl).GetPropertyObject<ApiKeyCreate>();
             return (JObject.FromObject(new
             {
-                name = mdl.Name,
-                displayName = mdl.DisplayName
+                description = mdl.Description,
+                flags = mdl.Flags,
+                expirationDate = mdl.ExpirationDate,
+                useNum = mdl.UseNum
             }));
         }
 
         public string GetURL(Control ctrl)
         {
-            return ("symbol/lang");
+            return ("admin/apikey");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)

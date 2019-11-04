@@ -9,16 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinClient.Actions;
+using WinClient.Views;
 
 namespace WinClient.Forms
 {
     public partial class MainMenu : Form
     {
         private NetManager _netManager = new NetManager();
-        private static List<IAction> AL = new List<IAction>()
+        private static List<Views.View.IBuilder> ViewList = new List<Views.View.IBuilder>()
         {
-            new DebugInfo(),
-            new ListGroups(),
+            new DebugInfo.Builder()//,
+            /*new ListGroups(),
             new ListApiKeys(),
             new ListBots(),
             new ListSymbolLangs(),
@@ -27,23 +28,22 @@ namespace WinClient.Forms
             new PostGroup(),
             new PostBot(),
             new PostSymbolLang(),
-            new PostSymbolType()
+            new PostSymbolType()*/
         };
-        private IAction _current;
+        private Views.View _current;
 
         public MainMenu()
         {
             InitializeComponent();
-            foreach (IAction act in AL)
+            foreach (Views.View.IBuilder v in ViewList)
             {
-                ActionList.Items.Add(act.DisplayName);
+                ActionList.Items.Add(v.DisplayName);
             }
         }
 
         private void InputLogin_Click(object sender, EventArgs e)
         {
             IOPanel.Controls.Clear();
-            LoadIndicator.Visible = true;
             _netManager = new NetManager(InputUserName.Text, InputPassword.Text);
             if (_netManager.GetAuthError() != null)
             {
@@ -56,7 +56,6 @@ namespace WinClient.Forms
             }
             else
                 LoginPanel.Visible = false;
-            LoadIndicator.Visible = false;
         }
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
@@ -64,7 +63,7 @@ namespace WinClient.Forms
             _netManager.Exit();
         }
 
-        private void RunRequest(IAction act, Control input)
+        /*private void RunRequest(IAction act, Control input)
         {
             string url = act.GetURL(input);
             dynamic res = null;
@@ -94,37 +93,27 @@ namespace WinClient.Forms
             }
             _current = null;
             InputRun.Visible = false;
-        }
+        }*/
 
         private void ActionList_Click(object sender, EventArgs e)
         {
             IOPanel.Controls.Clear();
             if (ActionList.SelectedItem != null)
             {
-                IAction act = null;
-                foreach (IAction a in AL)
+                Views.View.IBuilder view = null;
+                foreach (Views.View.IBuilder v in ViewList)
                 {
-                    if (a.DisplayName == (string)ActionList.SelectedItem)
-                        act = a;
+                    if (v.DisplayName == (string)ActionList.SelectedItem)
+                        view = v;
                 }
-                Control c = act.CreateInputControl();
-                _current = act;
+                _current = view.Build(_netManager);
+                Control c = _current.BuildMainView();
                 if (c != null)
                 {
                     c.Dock = DockStyle.Fill;
                     IOPanel.Controls.Add(c);
-                    InputRun.Visible = true;
                 }
-                else
-                    RunRequest(act, null);
             }
-        }
-
-        private void InputRun_Click(object sender, EventArgs e)
-        {
-            LoadIndicator.Visible = true;
-            RunRequest(_current, IOPanel.Controls[0]);
-            LoadIndicator.Visible = false;
         }
     }
 }

@@ -50,22 +50,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actions\DebugInfo.cs" />
-    <Compile Include="Actions\IAction.cs" />
-    <Compile Include="Actions\ListApiKeys.cs" />
-    <Compile Include="Actions\ListBots.cs" />
-    <Compile Include="Actions\ListGroups.cs" />
-    <Compile Include="Actions\ListSymbolLangs.cs" />
-    <Compile Include="Actions\ListSymbolTypes.cs" />
-    <Compile Include="Actions\PostApiKey.cs" />
-    <Compile Include="Actions\PostBot.cs" />
-    <Compile Include="Actions\PostGroup.cs" />
-    <Compile Include="Actions\PostSymbolLang.cs" />
-    <Compile Include="Actions\PostSymbolType.cs" />
-    <Compile Include="PropertyMap.cs">
+    <Compile Include="Views\BrowserView.cs" />
+    <Compile Include="Views\DebugInfo.cs" />
+    <Compile Include="Views\View.cs" />
+    <Compile Include="Views\ListApiKeys.cs" />
+    <Compile Include="Views\ListBots.cs" />
+    <Compile Include="Views\ListGroups.cs" />
+    <Compile Include="Views\ListSymbolLangs.cs" />
+    <Compile Include="Views\ListSymbolTypes.cs" />
+    <Compile Include="Views\PatchApiKey.cs" />
+    <Compile Include="Views\PatchBot.cs" />
+    <Compile Include="Views\PatchGroup.cs" />
+    <Compile Include="Views\PatchSymbolLang.cs" />
+    <Compile Include="Views\PatchSymbolType.cs" />
+    <Compile Include="Views\PostApiKey.cs" />
+    <Compile Include="Views\PostBot.cs" />
+    <Compile Include="Views\PostGroup.cs" />
+    <Compile Include="Views\PostSymbolLang.cs" />
+    <Compile Include="Views\PostSymbolType.cs" />
+    <Compile Include="Browsers\IBrowser.cs" />
+    <Compile Include="UI\Browser.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PropertyMap.Designer.cs">
+    <Compile Include="UI\Browser.Designer.cs">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PropertyMap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\PropertyMap.Designer.cs">
       <DependentUpon>PropertyMap.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainMenu.cs">
@@ -74,22 +87,25 @@
     <Compile Include="Forms\MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="JsonTreeViewer.cs">
+    <Compile Include="UI\JsonTreeViewer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="JsonTreeViewer.Designer.cs">
+    <Compile Include="UI\JsonTreeViewer.Designer.cs">
       <DependentUpon>JsonTreeViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="NetManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PropertyMap.resx">
+    <EmbeddedResource Include="UI\Browser.resx">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PropertyMap.resx">
       <DependentUpon>PropertyMap.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JsonTreeViewer.resx">
+    <EmbeddedResource Include="UI\JsonTreeViewer.resx">
       <DependentUpon>JsonTreeViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

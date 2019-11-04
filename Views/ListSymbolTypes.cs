@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class ListSymbolLangs : IAction
+    class ListSymbolTypes// : IAction
     {
         public string Method => "GET";
 
-        public string DisplayName => "List Symbol Langs";
+        public string DisplayName => "List Symbol Types";
 
         public bool NeedAuth => false;
 
@@ -33,7 +34,7 @@ namespace WinClient.Actions
 
         public string GetURL(Control ctrl)
         {
-            return ("symbol/lang");
+            return ("symbol/type");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)

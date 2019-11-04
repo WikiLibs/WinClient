@@ -1,4 +1,4 @@
-﻿namespace WinClient
+﻿namespace WinClient.UI
 {
     partial class JsonTreeViewer
     {

@@ -1,24 +1,37 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.Build.Framework;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class ListGroups : IAction
+    class GroupCreate
     {
-        public string Method => "GET";
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        public string[] Permissions { get; set; }
+    }
 
-        public string DisplayName => "List Groups";
+    class PostGroup// : IAction
+    {
+        public string Method => "POST";
+
+        public string DisplayName => "Create Group";
 
         public bool NeedAuth => true;
 
         public Control CreateInputControl()
         {
-            return (null);
+            var p = new PropertyMap();
+
+            p.SetPropertyObject(new GroupCreate());
+            return (p);
         }
 
         public Control CreateOutputControl()
@@ -28,7 +41,12 @@ namespace WinClient.Actions
 
         public JObject GetInput(Control ctrl)
         {
-            return (null);
+            var mdl = ((PropertyMap)ctrl).GetPropertyObject<GroupCreate>();
+            return (JObject.FromObject(new
+            {
+                name = mdl.Name,
+                permissions = mdl.Permissions
+            }));
         }
 
         public string GetURL(Control ctrl)

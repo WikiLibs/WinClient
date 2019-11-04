@@ -1,4 +1,4 @@
-﻿namespace WinClient.Actions
+﻿namespace WinClient.UI
 {
     partial class PropertyMap
     {

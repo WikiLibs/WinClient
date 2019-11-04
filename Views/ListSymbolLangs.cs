@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class ListBots : IAction
+    class ListSymbolLangs// : IAction
     {
         public string Method => "GET";
 
-        public string DisplayName => "List Bots";
+        public string DisplayName => "List Symbol Langs";
 
-        public bool NeedAuth => true;
+        public bool NeedAuth => false;
 
         public Control CreateInputControl()
         {
@@ -33,7 +34,7 @@ namespace WinClient.Actions
 
         public string GetURL(Control ctrl)
         {
-            return ("bot");
+            return ("symbol/lang");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)

@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using WinClient.UI;
 
 namespace WinClient.Actions
 {
-    class DebugInfo : IAction
+    class ListBots// : IAction
     {
         public string Method => "GET";
 
-        public string DisplayName => "Debug Page";
+        public string DisplayName => "List Bots";
 
-        public bool NeedAuth => false;
+        public bool NeedAuth => true;
 
         public Control CreateInputControl()
         {
@@ -34,7 +34,7 @@ namespace WinClient.Actions
 
         public string GetURL(Control ctrl)
         {
-            return ("debug");
+            return ("bot");
         }
 
         public void ProcessOutput(Control ctrl, dynamic response, NetManager mgr)
