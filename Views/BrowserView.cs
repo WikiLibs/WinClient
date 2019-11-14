@@ -27,8 +27,6 @@ namespace WinClient.Views
             _ui = new UI.Browser();
             var obj = _browser.Get(NetManager);
 
-            _ui.OutputPanel.RenderJson(obj);
-            _ui.PostPMap.SetPropertyObject(_post);
             _ui.RunPost.Click += RunPost_Click;
             _ui.RunPatch.Click += RunPatch_Click;
             _ui.OK.Click += OK_Click;
@@ -36,6 +34,8 @@ namespace WinClient.Views
             _ui.OutputPanel.HasPatchOperation += HasPatch;
             _ui.OutputPanel.RunDeleteOperation += RunDelete;
             _ui.OutputPanel.RunPatchOperation += RunPatch;
+            _ui.OutputPanel.RenderJson(obj);
+            _ui.PostPMap.SetPropertyObject(_post);
             return (_ui);
         }
 
