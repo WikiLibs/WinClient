@@ -8,6 +8,8 @@ namespace WinClient.Browsers
 {
     interface IBrowser
     {
+        object CreatePostObject();
+        object CreatePatchObject(string key, string value);
         dynamic Get(NetManager net);
         dynamic Patch(NetManager net, string key, object input);
         dynamic Post(NetManager net, object input);

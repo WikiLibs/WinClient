@@ -16,10 +16,5 @@ namespace WinClient.UI
         {
             InitializeComponent();
         }
-
-        private void Layout_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

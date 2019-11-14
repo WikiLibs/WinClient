@@ -50,6 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Browsers\ApiKeyBrowser.cs" />
+    <Compile Include="Browsers\BotBrowser.cs" />
+    <Compile Include="Browsers\GroupBrowser.cs" />
+    <Compile Include="Browsers\SymbolLangBrowser.cs" />
+    <Compile Include="Browsers\SymbolTypeBrowser.cs" />
     <Compile Include="Views\BrowserView.cs" />
     <Compile Include="Views\DebugInfo.cs" />
     <Compile Include="Views\View.cs" />

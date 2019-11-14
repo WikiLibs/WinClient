@@ -18,17 +18,12 @@ namespace WinClient.Forms
         private NetManager _netManager = new NetManager();
         private static List<Views.View.IBuilder> ViewList = new List<Views.View.IBuilder>()
         {
-            new DebugInfo.Builder()//,
-            /*new ListGroups(),
-            new ListApiKeys(),
-            new ListBots(),
-            new ListSymbolLangs(),
-            new ListSymbolTypes(),
-            new PostApiKey(),
-            new PostGroup(),
-            new PostBot(),
-            new PostSymbolLang(),
-            new PostSymbolType()*/
+            new DebugInfo.Builder(),
+            new Browsers.ApiKeyBrowser.Builder(),
+            new Browsers.GroupBrowser.Builder(),
+            new Browsers.BotBrowser.Builder(),
+            new Browsers.SymbolLangBrowser.Builder(),
+            new Browsers.SymbolTypeBrowser.Builder()
         };
         private Views.View _current;
 
