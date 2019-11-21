@@ -144,13 +144,14 @@ namespace WinClient.UI
             }
         }
 
-        public void RenderJson(JToken token)
+        public void RenderJson(JToken token, bool expand = true)
         {
             var topNode = RenderToken(token, "Root");
 
             TreeView.Nodes.Clear();
             TreeView.Nodes.Add(topNode);
-            TreeView.ExpandAll();
+            if (expand)
+                TreeView.ExpandAll();
         }
     }
 }

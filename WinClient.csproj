@@ -83,6 +83,7 @@
     <Compile Include="Browsers\GroupBrowser.cs" />
     <Compile Include="Browsers\SymbolLangBrowser.cs" />
     <Compile Include="Browsers\SymbolTypeBrowser.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Views\BrowserView.cs" />
     <Compile Include="Views\DebugInfo.cs" />
     <Compile Include="Views\SymbolViewer.cs" />

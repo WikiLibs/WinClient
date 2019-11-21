@@ -12,8 +12,6 @@ namespace WinClient
 {
     public class NetManager
     {
-        private const string BASE_URL = "https://wikilibs-dev-api.azurewebsites.net/";
-        private const string API_KEY = "12cbfcc1-2159-4814-8812-eeb4decdc9b7";
         private string _token;
         private bool _shuttingDown = false;
         private DateTime _lastToken = DateTime.UtcNow;
@@ -73,13 +71,13 @@ namespace WinClient
 
         public bool Get(bool auth, string url, out dynamic response)
         {
-            WebRequest req = WebRequest.Create(BASE_URL + url);
+            WebRequest req = WebRequest.Create(Constants.BASE_URL + url);
 
             req.Method = "GET";
             if (auth)
                 req.Headers.Add("Authorization", "Bearer " + _token);
             else
-                req.Headers.Add("Authorization", API_KEY);
+                req.Headers.Add("Authorization", Constants.API_KEY);
             try
             {
                 WebResponse rsp = req.GetResponse();
@@ -107,13 +105,13 @@ namespace WinClient
 
         public bool Post(bool auth, string url, out dynamic response, JObject data)
         {
-            WebRequest req = WebRequest.Create(BASE_URL + url);
+            WebRequest req = WebRequest.Create(Constants.BASE_URL + url);
 
             req.Method = "POST";
             if (auth)
                 req.Headers.Add("Authorization", "Bearer " + _token);
             else
-                req.Headers.Add("Authorization", API_KEY);
+                req.Headers.Add("Authorization", Constants.API_KEY);
             if (data != null)
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString(Formatting.None));
@@ -152,13 +150,13 @@ namespace WinClient
 
         public dynamic Patch(bool auth, string url, out dynamic response, JObject data)
         {
-            WebRequest req = WebRequest.Create(BASE_URL + url);
+            WebRequest req = WebRequest.Create(Constants.BASE_URL + url);
 
             req.Method = "PATCH";
             if (auth)
                 req.Headers.Add("Authorization", "Bearer " + _token);
             else
-                req.Headers.Add("Authorization", API_KEY);
+                req.Headers.Add("Authorization", Constants.API_KEY);
             if (data != null)
             {
                 byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString(Formatting.None));
@@ -197,13 +195,13 @@ namespace WinClient
 
         public dynamic Delete(bool auth, string url, out dynamic response)
         {
-            WebRequest req = WebRequest.Create(BASE_URL + url);
+            WebRequest req = WebRequest.Create(Constants.BASE_URL + url);
 
             req.Method = "DELETE";
             if (auth)
                 req.Headers.Add("Authorization", "Bearer " + _token);
             else
-                req.Headers.Add("Authorization", API_KEY);
+                req.Headers.Add("Authorization", Constants.API_KEY);
             try
             {
                 WebResponse rsp = req.GetResponse();
