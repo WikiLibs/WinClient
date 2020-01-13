@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,6 +52,43 @@ namespace WinClient.Forms
             }
             else
                 LoginPanel.Visible = false;
+            dynamic rsp;
+            _netManager.Put(true, "symbol/C/InputStream1/sfInputStream", out rsp, JObject.FromObject(new
+            {
+                lang = "C",
+                path = "C/InputStream1/sfInputStream",
+                type = "typedef",
+                prototypes = new object[]
+                {
+                        new
+                        {
+                            prototype = "typedef sfInputStream struct sfInputStream",
+                            parameters = new object[] { }
+                        }
+                },
+                symbols = new string[] { }
+            }));
+            _netManager.Put(true, "symbol/C/InputStream1/sfInputStream", out rsp, JObject.FromObject(new
+            {
+                lang = "C",
+                path = "C/InputStream1/sfInputStream",
+                type = "struct",
+                prototypes = new object[]
+                {
+                        new
+                        {
+                            prototype = "struct sfInputStream",
+                            parameters = new object[] { }
+                        }
+                },
+                symbols = new string[] {
+                        "C/InputStream1/sfInputStream/read",
+                        "C/InputStream1/sfInputStream/seek",
+                        "C/InputStream1/sfInputStream/tell",
+                        "C/InputStream1/sfInputStream/getSize",
+                        "C/InputStream1/sfInputStream/userData"
+                    }
+            }));
         }
 
         private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)

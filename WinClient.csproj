@@ -87,6 +87,7 @@
     <Compile Include="Views\BrowserView.cs" />
     <Compile Include="Views\DebugInfo.cs" />
     <Compile Include="Views\SymbolViewer.cs" />
+    <Compile Include="Views\UserViewer.cs" />
     <Compile Include="Views\View.cs" />
     <Compile Include="Browsers\IBrowser.cs" />
     <Compile Include="UI\Browser.cs">

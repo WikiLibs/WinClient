@@ -31,7 +31,7 @@ namespace WinClient
             {
                 _lastToken = DateTime.UtcNow;
                 _token = d;
-                Task.Run(ContinousRun);
+                Task.Run(() => ContinousRun());
             }
         }
 
@@ -153,6 +153,51 @@ namespace WinClient
             WebRequest req = WebRequest.Create(Constants.BASE_URL + url);
 
             req.Method = "PATCH";
+            if (auth)
+                req.Headers.Add("Authorization", "Bearer " + _token);
+            else
+                req.Headers.Add("Authorization", Constants.API_KEY);
+            if (data != null)
+            {
+                byte[] byteArray = Encoding.UTF8.GetBytes(data.ToString(Formatting.None));
+                req.ContentType = "application/json";
+                req.ContentLength = byteArray.Length;
+                Stream stream = req.GetRequestStream();
+                stream.Write(byteArray, 0, byteArray.Length);
+                stream.Close();
+            }
+            try
+            {
+                WebResponse rsp = req.GetResponse();
+                using (Stream stream = rsp.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    string responseStr = reader.ReadToEnd();
+                    rsp.Close();
+                    if (responseStr.StartsWith("\"") && responseStr.EndsWith("\""))
+                        response = responseStr.Substring(1, responseStr.Length - 2);
+                    response = JsonConvert.DeserializeObject(responseStr);
+                    return (true);
+                }
+            }
+            catch (WebException ex)
+            {
+                using (Stream stream = ex.Response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(stream);
+                    string responseStr = reader.ReadToEnd();
+                    ex.Response.Close();
+                    response = JsonConvert.DeserializeObject(responseStr);
+                    return (false);
+                }
+            }
+        }
+
+        public dynamic Put(bool auth, string url, out dynamic response, JObject data)
+        {
+            WebRequest req = WebRequest.Create(Constants.BASE_URL + url);
+
+            req.Method = "PUT";
             if (auth)
                 req.Headers.Add("Authorization", "Bearer " + _token);
             else

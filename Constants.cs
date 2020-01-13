@@ -9,7 +9,7 @@ namespace WinClient
     class Constants
     {
         public const string BASE_URL = "https://wikilibs-dev-api.azurewebsites.net/";
-        public const string API_KEY = "12cbfcc1-2159-4814-8812-eeb4decdc9b7";
+        public const string API_KEY = "5c2a6a60-c5b3-4df2-b0bf-5235fd495e8a";
         public const int SYMBOL_COUNT = 1000;
     }
 }
