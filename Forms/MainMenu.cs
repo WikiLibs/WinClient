@@ -24,7 +24,8 @@ namespace WinClient.Forms
             new Browsers.BotBrowser.Builder(),
             new Browsers.SymbolLangBrowser.Builder(),
             new Browsers.SymbolTypeBrowser.Builder(),
-            new SymbolViewer.Builder()
+            new SymbolViewer.Builder(),
+            new UserViewer.Builder()
         };
         private Views.View _current;
 
